@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { fetchAPI } from "../../api/fetch-api";
 import { ImportantEventsBasicData, ImportantEventsFormMetadata } from "../../model/importantEvents.model";
-import { t } from "i18next";
+// import { t } from "i18next";
 
 interface ImportantEventsSlice {
   loadingImportantEventsBasicData: boolean;
@@ -48,37 +48,37 @@ const importantEventsSlice = createSlice({
         state.importantEventsBasicData = payload;
         state.importantEventsFormMetadata = [
           {
-            label: t("OtherInterventionsStarted", { ns: "ImportantEvents" }),
+            label: "OtherInterventionsStarted",
             entityName: "otherInterventionsStarted",
             entitiesData: payload.otherInterventionsStartedEntities
           },
           {
-            label: t("DuringIntervention", { ns: "ImportantEvents" }),
+            label: "DuringIntervention",
             entityName: "duringIntervention",
             entitiesData: payload.duringInterventionEntities
           },
           {
-            label: t("DuringPast", { ns: "ImportantEvents" }),
+            label: "DuringPast",
             entityName: "duringPast",
             entitiesData: payload.duringPastEntities
           },
           {
-            label: t("ChildSchool", { ns: "ImportantEvents" }),
+            label: "ChildSchool",
             entityName: "childSchool",
             entitiesData: payload.childSchoolEntities
           },
           {
-            label: t("ChangeAccomodation", { ns: "ImportantEvents" }),
+            label: "ChangeAccomodation",
             entityName: "changeAccomodation",
             entitiesData: payload.changeAccomodationEntities
           },
           {
-            label: t("ChangeEmploymentVh1", { ns: "ImportantEvents" }),
+            label: "ChangeEmploymentVh1",
             entityName: "changeEmploymentVh1",
             entitiesData: payload.changeEmploymentVh1Entities
           },
           {
-            label: t("ChangeEmploymentVh2", { ns: "ImportantEvents" }),
+            label: "ChangeEmploymentVh2",
             entityName: "changeEmploymentVh2",
             entitiesData: payload.changeEmploymentVh2Entities
           },

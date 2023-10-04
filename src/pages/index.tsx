@@ -156,7 +156,7 @@ export default function ImportantEventsPage() {
               return (
                 <FormControl component="fieldset" fullWidth key={metaDataIndex}>
                   <FormLabel component="legend">
-                    <Typography variant="h6" color="#33A474">{metaData.label}</Typography>
+                    <Typography variant="h6" color="#33A474">{t(metaData.label, { ns: "ImportantEvents" })}</Typography>
                   </FormLabel>
                   {unfilledEntityNames.includes(metaData.entityName) && (
                     <Typography color="error" fontSize={12}>* {t("Word.Required")}.</Typography>
