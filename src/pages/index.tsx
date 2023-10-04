@@ -135,9 +135,9 @@ export default function ImportantEventsPage() {
         <img src={leafImage}></img>
         {todayStr}
       </Grid>
-      <Typography variant="h3" align="center">{t("Important events in the last 12 months")}</Typography>
+      <Typography variant="h3" align="center">{t("ImportantTitle")}</Typography>
       <br />
-      <Typography variant="h5" align="center">{t("Answered in connection with surveys 12 months after the effort started.")}</Typography>
+      <Typography variant="h5" align="center">{t("AnsweredTitle")}</Typography>
       <br />
       {/* Show Checkbox Sections */}
       <Container maxWidth="sm">
