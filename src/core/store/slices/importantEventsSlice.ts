@@ -48,37 +48,37 @@ const importantEventsSlice = createSlice({
         state.importantEventsBasicData = payload;
         state.importantEventsFormMetadata = [
           {
-            label: "OtherInterventionsStarted",
+            label: "Label.OtherInterventionsStarted",
             entityName: "otherInterventionsStarted",
             entitiesData: payload.otherInterventionsStartedEntities
           },
           {
-            label: "DuringIntervention",
+            label: "Label.DuringIntervention",
             entityName: "duringIntervention",
             entitiesData: payload.duringInterventionEntities
           },
           {
-            label: "DuringPast",
+            label: "Label.DuringPast",
             entityName: "duringPast",
             entitiesData: payload.duringPastEntities
           },
           {
-            label: "ChildSchool",
+            label: "Label.ChildSchool",
             entityName: "childSchool",
             entitiesData: payload.childSchoolEntities
           },
           {
-            label: "ChangeAccomodation",
+            label: "Label.ChangeAccomodation",
             entityName: "changeAccomodation",
             entitiesData: payload.changeAccomodationEntities
           },
           {
-            label: "ChangeEmploymentVh1",
+            label: "Label.ChangeEmploymentVh1",
             entityName: "changeEmploymentVh1",
             entitiesData: payload.changeEmploymentVh1Entities
           },
           {
-            label: "ChangeEmploymentVh2",
+            label: "Label.ChangeEmploymentVh2",
             entityName: "changeEmploymentVh2",
             entitiesData: payload.changeEmploymentVh2Entities
           },
