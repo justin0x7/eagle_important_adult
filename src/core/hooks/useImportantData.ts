@@ -1,19 +1,19 @@
 import { useQuery } from "react-query";
 import { fetchAPI } from "../api/fetch-api";
-import { ImportantEventsData } from "../model/importantEvents.model";
+import { ImportantEventsVuxData } from "../model/importantEventsVux.model";
 
-const getImportantEventsData = async (codeNumber: string) => {
+const getImportantEventsVuxData = async (codeNumber: string) => {
   const { data } = await fetchAPI({
     url: `/important-events/get/${codeNumber}`,
     method: "GET"
   });
-  return data as ImportantEventsData;
+  return data as ImportantEventsVuxData;
 };
 
-export const useImportantEventsData = (codeNumber: string) => {
+export const useImportantEventsVuxData = (codeNumber: string) => {
   return useQuery(
     ["get-important-events", codeNumber],
-    () => getImportantEventsData(codeNumber),
+    () => getImportantEventsVuxData(codeNumber),
     {
       enabled: !!codeNumber
     });

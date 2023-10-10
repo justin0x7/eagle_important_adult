@@ -1,10 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
 
-import importantEventsSliceReducer from "./slices/importantEventsSlice";
+import importantEventsVuxSliceReducer from "./slices/importantEventsSlice";
 
 export const store = configureStore({
   reducer: {
-    importantEvents: importantEventsSliceReducer,
+    importantEventsVux: importantEventsVuxSliceReducer,
   },
   middleware: getDefaultMiddleware => getDefaultMiddleware({ serializableCheck: false }),
 });

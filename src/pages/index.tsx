@@ -17,10 +17,10 @@ import leafImage from "../assets/pageLogo.png";
 import { fetchAPI } from "../core/api/fetch-api";
 import { ButtonPrimary } from "../core/components/Button";
 import { useAppSelector } from '../core/hooks/rtkHooks';
-import { useImportantEventsData } from '../core/hooks/useImportantData';
-import { FormDataMap, ImportantEventsBasicData, ImportantEventsData } from "../core/model/importantEvents.model";
+import { useImportantEventsVuxData } from '../core/hooks/useImportantData';
+import { FormDataMap, ImportantEventsVuxBasicData, ImportantEventsVuxData } from "../core/model/importantEventsVux.model";
 
-export default function ImportantEventsPage() {
+export default function ImportantEventsVuxPage() {
 
   const { t } = useTranslation();
 
@@ -29,11 +29,11 @@ export default function ImportantEventsPage() {
   const [unfilledEntityNames, setUnfilledEntityNames] = useState<Array<string>>([]);
 
   const {
-    loadingImportantEventsBasicData,
-    importantEventsBasicData,
-    importantEventsFormMetadata
-  } = useAppSelector((state) => state.importantEvents);
-  const { data: importantEventsData } = useImportantEventsData(codeNumber);
+    loadingImportantEventsVuxBasicData,
+    importantEventsVuxBasicData,
+    importantEventsVuxFormMetadata
+  } = useAppSelector((state) => state.importantEventsVux);
+  const { data: importantEventsVuxData } = useImportantEventsVuxData(codeNumber);
   const todayStr = dayjs().format("YYYY-MM-DD");
 
   // get codeNumber from encoded url parameter
@@ -50,22 +50,22 @@ export default function ImportantEventsPage() {
 
   // set form data
   useEffect(() => {
-    if (!loadingImportantEventsBasicData && !!importantEventsBasicData) {
+    if (!loadingImportantEventsVuxBasicData && !!importantEventsVuxBasicData) {
       const mappedData: FormDataMap = {};
-      Object.keys(importantEventsBasicData).forEach((entityPluralName) => {
+      Object.keys(importantEventsVuxBasicData).forEach((entityPluralName) => {
         const entityName = entityPluralName.replace("Entities", "");
         mappedData[entityName] = {};
-        const basicDataUnits = importantEventsBasicData[entityPluralName as keyof ImportantEventsBasicData];
+        const basicDataUnits = importantEventsVuxBasicData[entityPluralName as keyof ImportantEventsVuxBasicData];
         basicDataUnits.forEach((basicDataUnit) => {
           const nId = basicDataUnit.id;
-          const booleanValue = importantEventsData?.formDataByEntityName[entityName].includes(nId) || false;
+          const booleanValue = importantEventsVuxData?.formDataByEntityName[entityName].includes(nId) || false;
           mappedData[entityName][nId.toString()] = booleanValue;
         });
       });
 
       setFormData(mappedData);
     }
-  }, [loadingImportantEventsBasicData, importantEventsBasicData, codeNumber, importantEventsData]);
+  }, [loadingImportantEventsVuxBasicData, importantEventsVuxBasicData, codeNumber, importantEventsVuxData]);
 
   const handleChangeCheckbox = (entityName: string, idString: string, metaData: any) => {
     if (!formData) return;
@@ -82,19 +82,19 @@ export default function ImportantEventsPage() {
   const handleSave = async () => {
     if (formData) {
       try {
-        const importantEventsData = {} as ImportantEventsData;
-        importantEventsData.codeNumber = codeNumber as string;
-        importantEventsData.formDataByEntityName = {};
+        const importantEventsVuxData = {} as ImportantEventsVuxData;
+        importantEventsVuxData.codeNumber = codeNumber as string;
+        importantEventsVuxData.formDataByEntityName = {};
 
         let hasValue = false;
         let unfilledEntities: string[] = [];
-        Object.keys(importantEventsBasicData).forEach((entityPluralName) => {
+        Object.keys(importantEventsVuxBasicData).forEach((entityPluralName) => {
           const entityName = entityPluralName.replace("Entities", "");
-          importantEventsData.formDataByEntityName[entityName] = [];
+          importantEventsVuxData.formDataByEntityName[entityName] = [];
           for (const idString in formData[entityName]) {
             if (formData[entityName][idString]) {
               hasValue = true;
-              importantEventsData.formDataByEntityName[entityName].push(+idString);
+              importantEventsVuxData.formDataByEntityName[entityName].push(+idString);
             }
           }
           if (!hasValue) {
@@ -111,7 +111,7 @@ export default function ImportantEventsPage() {
           await fetchAPI({
             url: `/important-events/save`,
             method: "POST",
-            body: importantEventsData
+            body: importantEventsVuxData
           });
           setUnfilledEntityNames([]);
           alert("Saved successfully.");
@@ -150,13 +150,13 @@ export default function ImportantEventsPage() {
 
       {/* Show Checkbox Sections */}
       <Container maxWidth="md">
-        {!!formData && !!importantEventsFormMetadata && (
+        {!!formData && !!importantEventsVuxFormMetadata && (
           <Stack gap={3}>
-            {importantEventsFormMetadata.map((metaData, metaDataIndex) => {
+            {importantEventsVuxFormMetadata.map((metaData, metaDataIndex) => {
               return (
                 <FormControl component="fieldset" fullWidth key={metaDataIndex}>
                   <FormLabel component="legend">
-                    <Typography variant="h6" color="#33A474">{t(metaData.label, { ns: "ImportantEvents" })}</Typography>
+                    <Typography variant="h6" color="#33A474">{t(metaData.label, { ns: "ImportantEventsVux" })}</Typography>
                   </FormLabel>
                   {unfilledEntityNames.includes(metaData.entityName) && (
                     <Typography color="error" fontSize={12}>* {t("Word.Required")}.</Typography>
@@ -172,7 +172,7 @@ export default function ImportantEventsPage() {
                                 checked={!!formData[metaData.entityName][basicDataUnit.id.toString()]}
                                 onChange={() => handleChangeCheckbox(metaData.entityName, basicDataUnit.id.toString(), metaData)}
                               />}
-                            label={t(basicDataUnit.description, { ns: "ImportantEvents" })}
+                            label={t(basicDataUnit.description, { ns: "ImportantEventsVux" })}
                           />
                         ))
                       )}

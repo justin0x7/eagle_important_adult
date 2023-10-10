@@ -1,29 +1,29 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { fetchAPI } from "../../api/fetch-api";
-import { ImportantEventsBasicData, ImportantEventsFormMetadata } from "../../model/importantEvents.model";
+import { ImportantEventsVuxBasicData, ImportantEventsVuxFormMetadata } from "../../model/importantEventsVux.model";
 // import { t } from "i18next";
 
-interface ImportantEventsSlice {
-  loadingImportantEventsBasicData: boolean;
-  importantEventsBasicData: ImportantEventsBasicData;
+interface ImportantEventsVuxSlice {
+  loadingImportantEventsVuxBasicData: boolean;
+  importantEventsVuxBasicData: ImportantEventsVuxBasicData;
 
-  importantEventsFormMetadata: ImportantEventsFormMetadata;
+  importantEventsVuxFormMetadata: ImportantEventsVuxFormMetadata;
 }
 
 const initialState = {
-  loadingImportantEventsBasicData: false,
-} as ImportantEventsSlice;
+  loadingImportantEventsVuxBasicData: false,
+} as ImportantEventsVuxSlice;
 
-export const loadImportantEventsBasicData = createAsyncThunk(
-  "importantEvents/loadImportantEventsBasicData",
+export const loadImportantEventsVuxBasicData = createAsyncThunk(
+  "importantEventsVux/loadImportantEventsVuxBasicData",
   async (_, thunkAPI) => {
     try {
       const { response, data } = await fetchAPI({
-        url: "/important-events/basicData",
+        url: "/important-events-vux/basicData",
         method: "GET"
       });
       if (response?.status === 200) {
-        return data as ImportantEventsBasicData;
+        return data as ImportantEventsVuxBasicData;
       } else {
         return thunkAPI.rejectWithValue(data);
       }
@@ -34,63 +34,48 @@ export const loadImportantEventsBasicData = createAsyncThunk(
   }
 );
 
-const importantEventsSlice = createSlice({
-  name: "importantEvents",
+const importantEventsVuxSlice = createSlice({
+  name: "importantEventsVux",
   initialState,
   reducers: {
   },
   extraReducers: (builder) => {
     builder
-      .addCase(loadImportantEventsBasicData.pending, (state) => {
-        state.loadingImportantEventsBasicData = true;
+      .addCase(loadImportantEventsVuxBasicData.pending, (state) => {
+        state.loadingImportantEventsVuxBasicData = true;
       })
-      .addCase(loadImportantEventsBasicData.fulfilled, (state, { payload }) => {
-        state.importantEventsBasicData = payload;
-        state.importantEventsFormMetadata = [
+      .addCase(loadImportantEventsVuxBasicData.fulfilled, (state, { payload }) => {
+        state.importantEventsVuxBasicData = payload;
+        state.importantEventsVuxFormMetadata = [
           {
-            label: "Label.OtherInterventionsStarted",
-            entityName: "otherInterventionsStarted",
-            entitiesData: payload.otherInterventionsStartedEntities
+            label: "Label.ChangeLive",
+            entityName: "changeLive",
+            entitiesData: payload.changeLiveEntities
           },
           {
-            label: "Label.DuringIntervention",
-            entityName: "duringIntervention",
-            entitiesData: payload.duringInterventionEntities
+            label: "Label.ChangeOver",
+            entityName: "changeOver",
+            entitiesData: payload.changeOverEntities
           },
           {
-            label: "Label.DuringPast",
-            entityName: "duringPast",
-            entitiesData: payload.duringPastEntities
+            label: "Label.InvestigationOut",
+            entityName: "investigationOut",
+            entitiesData: payload.investigationOutEntities
           },
           {
-            label: "Label.ChildSchool",
-            entityName: "childSchool",
-            entitiesData: payload.childSchoolEntities
-          },
-          {
-            label: "Label.ChangeAccomodation",
-            entityName: "changeAccomodation",
-            entitiesData: payload.changeAccomodationEntities
-          },
-          {
-            label: "Label.ChangeEmploymentVh1",
-            entityName: "changeEmploymentVh1",
-            entitiesData: payload.changeEmploymentVh1Entities
-          },
-          {
-            label: "Label.ChangeEmploymentVh2",
-            entityName: "changeEmploymentVh2",
-            entitiesData: payload.changeEmploymentVh2Entities
+            label: "Label.OtherInitiative",
+            entityName: "otherInitiative",
+            entitiesData: payload.otherInitiativeEntities
           },
         ]
-        state.loadingImportantEventsBasicData = false;
+        state.loadingImportantEventsVuxBasicData = false;
       })
-      .addCase(loadImportantEventsBasicData.rejected, (state) => {
-        state.loadingImportantEventsBasicData = false;
+      .addCase(loadImportantEventsVuxBasicData.rejected, (state) => {
+        state.loadingImportantEventsVuxBasicData = false;
       });
   }
 });
 
-export const { } = importantEventsSlice.actions;
+export const { } = importantEventsVuxSlice.actions;
 
-export default importantEventsSlice.reducer;
+export default importantEventsVuxSlice.reducer;
