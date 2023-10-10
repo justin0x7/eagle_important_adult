@@ -1,6 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 
-import importantEventsVuxSliceReducer from "./slices/importantEventsSlice";
+import importantEventsVuxSliceReducer from "./slices/importantEventsVuxSlice";
 
 export const store = configureStore({
   reducer: {

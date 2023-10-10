@@ -2,7 +2,7 @@ import * as React from 'react';
 import { lazy, Suspense } from 'react';
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { useAppDispatch } from './core/hooks/rtkHooks';
-import { loadImportantEventsVuxBasicData } from './core/store/slices/importantEventsSlice';
+import { loadImportantEventsVuxBasicData } from './core/store/slices/importantEventsVuxSlice';
 
 const Index = lazy(() => import('./pages'));
 

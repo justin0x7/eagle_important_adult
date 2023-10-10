@@ -13,7 +13,7 @@ i18next
   .init({
     fallbackLng: "sv",
 
-    ns: ["default","BackgroundSurvey","FollowUpSurvey","ImportantEvents","Questionnaire","Settings"],
+    ns: ["default","BackgroundSurvey","FollowUpSurvey","ImportantEvents","Questionnaire","Settings","ImportantEventsVux"],
     defaultNS: "default",
 
     supportedLngs: ["sv", "en"],
